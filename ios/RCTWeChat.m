@@ -286,16 +286,17 @@ RCT_EXPORT_METHOD(pay:(NSDictionary *)data
 {
     NSString *imageUrl = aData[RCTWXShareTypeThumbImageUrl];
     if (imageUrl.length && _bridge.imageLoader) {
-        NSURL *url = [NSURL URLWithString:imageUrl];
-        NSURLRequest *imageRequest = [NSURLRequest requestWithURL:url];
-        [_bridge.imageLoader loadImageWithURLRequest:imageRequest size:CGSizeMake(100, 100) scale:1 clipped:FALSE resizeMode:RCTResizeModeStretch progressBlock:nil partialLoadBlock:nil
-            completionBlock:^(NSError *error, UIImage *image) {
-            [self shareToWeixinWithData:aData thumbImage:image scene:aScene callBack:aCallBack];
-        }];
+        //        NSURL *url = [NSURL URLWithString:imageUrl];
+        //        NSURLRequest *imageRequest = [NSURLRequest requestWithURL:url];
+        //        [_bridge.imageLoader loadImageWithURLRequest:imageRequest size:CGSizeMake(100, 100) scale:1 clipped:FALSE resizeMode:RCTResizeModeStretch progressBlock:nil partialLoadBlock:nil
+        //            completionBlock:^(NSError *error, UIImage *image) {
+        //            [self shareToWeixinWithData:aData thumbImage:image scene:aScene callBack:aCallBack];
+        //        }];
+        [self shareToWeixinWithData:aData thumbImage:[UIImage imageNamed:imageUrl] scene:aScene callBack:aCallBack];
     } else {
         [self shareToWeixinWithData:aData thumbImage:nil scene:aScene callBack:aCallBack];
     }
-
+    
 }
 
 - (void)shareToWeixinWithTextMessage:(int)aScene
